@@ -1,14 +1,23 @@
-import { pool } from "../database/connection.js"
-import { Cliente, CriarCliente } from "../types/cliente.js"
+import { pool } from "../database/connection.js";
+import { Cliente, CriarCliente } from "../types/types.js";
 
 class ClienteService {
     async getAll(): Promise<Cliente[]> {
-        const res = await pool.query("SELECT * FROM clientes")
-
+        const res = await pool.query<Cliente>("SELECT * FROM clientes")
         return res.rows
-    } catch (error) {
-        console.error(error);
+    }
+
+    async create(dados: CriarCliente): Promise<Cliente> {
+        const res = await pool.query<Cliente>(`INSERT INTO clientes (nome, telefone, idade, email) VALUES ($1, $2, $3, $4) RETURNING *`, [dados.nome, dados.telefone, dados.idade, dados.email])
+
+        const cliente = res.rows[0]
+
+        if (!cliente) {
+            throw new Error("O banco não retornou o cliente cadastrado");
+        }
+
+        return cliente
+
     }
 }
-
 export const clienteService = new ClienteService()
