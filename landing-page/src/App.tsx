@@ -1,6 +1,8 @@
-import Navbar from "./components/Navbar"
-import Hero from "./components/Hero";
-import Feature from "./components/Feature/Index";
+import Navbar from "./layout/Navbar/index"
+import Hero from "./layout/Hero/index";
+import Feature from "./layout/Feature/Index";
+import Info from "./layout/Info/Index";
+import Forms from "./layout/Contact/Index"
 
 function App(){
   return(
@@ -8,6 +10,8 @@ function App(){
     <Navbar />
     <Hero />
     <Feature />
+    <Info />
+    <Forms />
     </>
   );
 }
