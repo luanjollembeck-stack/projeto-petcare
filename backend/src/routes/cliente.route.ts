@@ -29,6 +29,20 @@ clienteRouter.get("/:id", async (_request: Request<{id: string}> , response: Res
     }
 })
 
+clienteRouter.patch('/inativar/:id', async (request: Request<{id: string }>, response: Response) => {
+    const { id } = request.params
+    try {
+        const res = await clienteService.inativarCliente(id)
+        return response.json(res)
+    } catch (error) {
+        console.error(error);
+        return response.status(500).json({
+            error: "Erro Interno"
+        })
+    }
+})
+
+
 clienteRouter.post("/", async (request: Request<{}, {}, CriarCliente>, response: Response) => {
     try {
         const dados = request.body
