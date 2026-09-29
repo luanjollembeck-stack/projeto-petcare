@@ -4,7 +4,9 @@ import { MdOutlinePets } from "react-icons/md";
 
 export default function Hero() {
   return (
-    <section className="flex flex-col items-center justify-center py-20">
+    <section 
+    id="Inicio"
+    className="flex flex-col items-center justify-center py-20">
       <div className="flex items-center gap-2 bg-[#DCEFE4] p-2.5 rounded-full">
         <MdOutlinePets size={20} color="#153229" />
         <p className="text-[#153229] text-sm font-bold">

@@ -11,7 +11,7 @@ type CardProps = {
 
 export default function Cards({ title, description, icon, backgroundColor }: CardProps) {
     return (
-        <div className="bg-white border-[#ccc] rounded-lg p-8 mb-12 max-w-100">
+        <div className="bg-white border border-[#ccc] rounded-lg p-8 mb-12 max-w-100">
 
             
             <div className={`${backgroundColor} rounded-2xl p-2 w-12`}>{icon}</div>
