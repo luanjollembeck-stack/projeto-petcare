@@ -1,5 +1,5 @@
 import { pool } from "../database/connection.js";
-import { Cliente, CriarCliente } from "../types/types.js";
+import { Cliente, CriarCliente } from "../types/cliente.js";
 
 class ClienteService {
     async getAll(): Promise<Cliente[]> {
@@ -13,12 +13,12 @@ class ClienteService {
     }
 
     async inativarCliente(id: string): Promise<Cliente[]> {
-        const res = await pool.query<Cliente>("UPDATE clientes SET status='inativo' WHERE id=$1", [id])
+        const res = await pool.query<Cliente>("UPDATE cliente SET status='inativo' WHERE id=$1", [id])
         return res.rows
     }
 
     async create(dados: CriarCliente): Promise<Cliente> {
-        const res = await pool.query<Cliente>(`INSERT INTO clientes (nome, telefone, idade, email) VALUES ($1, $2, $3, $4) RETURNING *`, [dados.nome, dados.telefone, dados.idade, dados.email])
+        const res = await pool.query<Cliente>(`INSERT INTO cliente (nome, telefone, idade, email) VALUES ($1, $2, $3, $4) RETURNING *`, [dados.nome, dados.telefone, dados.idade, dados.email])
         const cliente = res.rows[0]
 
         if (!cliente) {

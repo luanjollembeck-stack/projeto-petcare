@@ -1,6 +1,6 @@
 import { Router, type Request, type Response } from "express"
 import { clienteService } from "../services/cliente.service.js"
-import { CriarCliente } from "../types/types.js"
+import { CriarCliente } from "../types/cliente.js"
 
 export const clienteRouter = Router()
 
