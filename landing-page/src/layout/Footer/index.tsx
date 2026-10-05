@@ -4,7 +4,7 @@ import { MdOutlinePets } from "react-icons/md";
 export default function Footer() {
   return (
     <footer className="bg-[#153229] p-10">
-      <div className="grid grid-cols-5 justify-items-center items-center pb-10 border-b border-[#ccc]">
+      <div className="grid grid-cols-4 justify-items-center items-center pb-10 border-b border-[#ccc]">
         <div>
           <div className="flex items-center gap-2">
             <MdOutlinePets size={24} color="#fff" />
