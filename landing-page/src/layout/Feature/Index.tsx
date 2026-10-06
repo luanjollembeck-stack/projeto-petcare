@@ -5,9 +5,9 @@ import { RiTvLine } from "react-icons/ri";
 
 export default function Ficture() {
     return (
-        <div 
-        id="Funcionalidades"
-        className="flex flex-col items-center justify-center py-20 ">
+        <div
+            id="Funcionalidades"
+            className="flex flex-col items-center justify-center py-20 ">
             <div className="flex items-center gap-2 bg-[#DCEFE4] p-2.5 rounded-full">
                 <p className="text-[#153229] text-sm font-bold">Funcionalidades</p>
             </div>
