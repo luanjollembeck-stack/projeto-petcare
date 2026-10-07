@@ -1,5 +1,16 @@
 import { NextFunction, type Request, type Response } from "express";
-import { request } from "node:http";
+import jwt from 'jsonwebtoken'
+import 'dotenv/config'
+
+export interface JwtPayLoad{
+    id_func: string,
+    nome: string
+    email: string,
+}
+
+export interface AuthReq extends Request{
+    user?: JwtPayLoad
+}
 
 export const ensureAuth2 = (
     request: Request,
@@ -18,5 +29,19 @@ export const ensureAuth2 = (
         return Response.status(401).json({ message: "Formato de token inválido"})
     }
 
-    
+    const JWT_SECRET = process.env.JWT_SECRET
+
+    if(!JWT_SECRET) {
+        return  Response.status(500).json({ message: "Chave não encontrada"})
+    }
+
+    try {
+        const decoded = jwt.verify(token, JWT_SECRET) as JwtPayLoad
+
+        Request.user = decoded
+
+        return next()
+    } catch (error) {
+        return Response.status(401).json({ message: "JWT inválido ou expirado"})
+    }
 }
