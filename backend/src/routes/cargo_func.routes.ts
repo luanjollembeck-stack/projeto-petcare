@@ -1,57 +1,67 @@
-import { Router, type Request, type Response } from "express";
-import { cargoFuncService } from "../services/cargo_func.service.js";
-import { CriarCargoFunc } from "../types/cargo_func.js";
+// import { Router, type Request, type Response } from "express";
+// import { cargoFuncService } from "../services/cargo_func.service.js";
+// import { CriarCargoFunc } from "../types/cargo_func.js";
 
-export const cargoFuncRouter = Router();
+// export const cargoFuncRouter = Router();
 
-cargoFuncRouter.get("/", async (_request: Request, response: Response) => {
-  try {
-    const res = await cargoFuncService.getAll();
+// cargoFuncRouter.get("/", async (_request: Request, response: Response) => {
+//   try {
+//     const res = await cargoFuncService.getAll();
 
-    return response.json(res);
-  } catch (error) {
-    console.error(error);
+//     return response.json(res);
+//   } catch (error) {
+//     console.error(error);
 
-    return response.status(500).json({
-      error: "Erro interno",
-    });
-  }
-});
+//     return response.status(500).json({
+//       error: "Erro interno",
+//     });
+//   }
+// });
 
-cargoFuncRouter.post(
-  "/",
-  async (request: Request<{}, {}, CriarCargoFunc>, response: Response) => {
-    try {
-      const dados = request.body;
+// cargoFuncRouter.post(
+//   "/",
+//   async (request: Request<{}, {}, CriarCargoFunc>, response: Response) => {
+//     try {
+//       const dados = request.body;
 
-      const cargo = await cargoFuncService.create(dados);
+//       const cargo = await cargoFuncService.create(dados);
 
-      return response.status(201).json(cargo);
-    } catch (error) {
-      console.error(error);
+//       return response.status(201).json(cargo);
+//     } catch (error) {
+//       console.error(error);
 
-      return response.status(500).json({
-        error: "Erro interno",
-      });
-    }
-  },
-);
+//       return response.status(500).json({
+//         error: "Erro interno",
+//       });
+//     }
+//   },
+// );
 
-cargoFuncRouter.get(
-  "/:id",
-  async (request: Request<{ id: string }>, response: Response) => {
-    const { id } = request.params;
+// cargoFuncRouter.get(
+//   "/:id",
+//   async (request: Request<{ id: string }>, response: Response) => {
+//     const { id } = request.params;
 
-    try {
-      const res = await cargoFuncService.getById(id);
+//     try {
+//       const res = await cargoFuncService.getById(id);
 
-      return response.json(res);
-    } catch (error) {
-      console.error(error);
+//       return response.json(res);
+//     } catch (error) {
+//       console.error(error);
 
-      return response.status(500).json({
-        error: "Erro interno",
-      });
-    }
-  },
-);
+//       return response.status(500).json({
+//         error: "Erro interno",
+//       });
+//     }
+//   },
+// );
+
+
+import { Router } from "express";
+import { cargoFuncController } from "../controller/cargo_func.controller.js"
+
+export const cargoFuncRouter = Router()
+
+cargoFuncRouter.get("/", cargoFuncController.getAll)
+cargoFuncRouter.post("/", cargoFuncController.create)
+cargoFuncRouter.get("/:id", cargoFuncController.getById)
