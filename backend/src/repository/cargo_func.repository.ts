@@ -4,7 +4,6 @@ import { CargoFunc, CriarCargoFunc } from "../types/cargo_func.js";
 class CargoFuncRepository {
     async getAll(): Promise<CargoFunc[]> {
         const res = await pool.query<CargoFunc>("SELECT * FROM cargo_func");
-
         return res.rows;
     }
 
@@ -13,24 +12,16 @@ class CargoFuncRepository {
             "SELECT * FROM cargo_func WHERE id = $1",
             [id],
         );
-
         return res.rows;
     }
     async create(dados: CriarCargoFunc): Promise<CargoFunc> {
         const res = await pool.query<CargoFunc>(
-            `INSERT INTO cargo_func
-        (nome)
-       VALUES ($1)
-       RETURNING *`,
-            [dados.nome],
+            `INSERT INTO cargo_func (nome) VALUES ($1) RETURNING *`,[dados.nome],
         );
-
         const cargo = res.rows[0];
-
         if (!cargo) {
             throw new Error("O banco não retornou o cargo cadastrado");
         }
-
         return cargo;
     }
 }
